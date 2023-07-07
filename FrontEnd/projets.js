@@ -1,5 +1,9 @@
+
+
 // Récupération des objet projets dans l'api
 const works = await fetch('http://localhost:5678/api/works').then(works => works.json())
+
+
 
 // Création des bouttons
 const divButtons = document.querySelector(".buttons")

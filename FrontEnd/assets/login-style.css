@@ -96,7 +96,7 @@ form {
     flex-direction: column;
 }
 
-input[type="submit"] {
+button {
     font-family: 'Syne';
     background-color: #1D6154;
     margin: auto;
@@ -110,7 +110,7 @@ input[type="submit"] {
     font-weight: 700;
 }
 
-input[type="submit"]:hover {
+button:hover {
     cursor: pointer;
 }
 
@@ -125,7 +125,7 @@ section p {
     margin-bottom: 300px;
 }
 
-input {
+input, button {
     border: none;
 }
 
