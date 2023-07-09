@@ -5,7 +5,8 @@ const works = await fetch('http://localhost:5678/api/works').then(works => works
 
 
 
-// Création des bouttons
+// Fonction pour la création des bouttons
+function createButton() {
 const divButtons = document.querySelector(".buttons")
 const baliseButtonAll = document.createElement("button")
 const baliseButtonObject = document.createElement("button")
@@ -23,6 +24,8 @@ divButtons.appendChild(baliseButtonAll)
 divButtons.appendChild(baliseButtonObject)
 divButtons.appendChild(baliseButtonApartment)
 divButtons.appendChild(baliseButtonHotelRestaurant)
+}
+
 
 //Création du visuel de la partie "Projets"
 function generateWorks(works) {
@@ -45,9 +48,9 @@ function generateWorks(works) {
     }
 }
 
-//Premier affichage de la partie Projets
-generateWorks(works)
+//Création de la fonction pour rendre les filtre fonctionnels
 
+function buttonFunctional() {
 //Boutons filtre all
 const buttonAll = document.querySelector(".all")
 buttonAll.addEventListener("click", () => {
@@ -84,6 +87,60 @@ buttonHotelRestaurant.addEventListener("click", () => {
     document.querySelector(".gallery").innerHTML = ""
     generateWorks(worksFilterHotelRestaurant)
 })
+}
+
+//Premier affichage de la partie Projets
+generateWorks(works)
+//Créer les boutons
+createButton()
+//On les rend fonctionnels
+buttonFunctional()
+
+// Génération du html de la baniere
+function generateBannerAdmin() {
+    
+    const baliseHeader = document.querySelector("header")
+    const baliseBanner = document.createElement("div")
+    baliseBanner.classList.add("banner")
+    const baliseP = document.createElement("p")
+    const baliseI = document.createElement("i")
+    const baliseButton = document.createElement("button")
+    baliseI.classList.add("fa-regular")
+    baliseI.classList.add("fa-pen-to-square")
+    baliseP.appendChild(baliseI)
+    const textBaliseP = "Mon édition"
+    baliseP.insertAdjacentHTML('beforeend', textBaliseP) //on utilise insertAdjacentHTML pour ajouter du text dans la balise p sans supprimer l'intérieur de la balise
+    baliseButton.innerText = "publier les changements"
+    baliseBanner.appendChild(baliseP)
+    baliseBanner.appendChild(baliseButton)
+    baliseHeader.prepend(baliseBanner)
+}
+
+
+function generateAdminWebPage() {
+    const token = sessionStorage.getItem("token")
+    if (token !== null) {
+        document.querySelector(".loginLogout").innerHTML = ""
+        //création du bouton logout
+        const baliseLoginLogout = document.querySelector(".loginLogout")
+        baliseLoginLogout.innerText = "Logout"
+        //On écoute le bouton logout pour supprimer le token dans le sessionstorage lorsque on click dessus donc on se déconnecte de l'administrateur
+        baliseLoginLogout.addEventListener("click", function() {
+            sessionStorage.removeItem("token")
+            //rechargement de la page pour mettre à jour le storage
+            location.reload()
+            console.log(token)
+        })
+        //on génére la bannière
+        generateBannerAdmin()
+        
+    }
+}
+generateAdminWebPage()
+
+
+
+
 
 
 

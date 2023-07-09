@@ -17,30 +17,36 @@
 <body>
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
-        <nav>
-            <ul>
-                <li>projets</li>
-                <li>contact</li>
-                <li class="login">login</li>
-                <li><img src="./assets/icons/instagram.png" alt="logo-instagram"> </li>
-            </ul>
-        </nav>
+		<nav>
+			<ul>
+				<li>projets</li>
+				<li>contact</li>
+				<li class="login">login</li>
+				<li><img src="./assets/icons/instagram.png" alt="logo-instagram"> </li>
+			</ul>
+		</nav>
 	</header>
 	<main>
 		<section>
-            <h2>Log in</h2>
-            <form action="#" method="post">
-				<label for="email">Email</label>
-				<input type="email" name="email" id="email">
-				<label for="password">Mot de passe</label>
-                <input type="password" name="email" id="password">
-                <button>Se connecter</button>
+			<h2>Log in</h2>
+			<form class="formLogin" action="#" method="post">
+				<div>
+					<label for="email">Email</label>
+					<input type="email" name="email" id="email">
+				</div>
+				<div>
+					<label for="password">Mot de passe</label>
+					<input type="password" name="password" id="password">
+				</div>
+				<div class="insertErreur"></div>
+				<button>Se connecter</button>
 			</form>
-            <p>Mot de passe oublié</p>
-        </section>
+			<p class="forget">Mot de passe oublié</p>
+		</section>
 	</main>
 	<footer>
-		<p>Mentions légales<p>
+		<p>Mentions légales
+		<p>
 	</footer>
 </body>
 
