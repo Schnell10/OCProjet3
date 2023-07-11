@@ -236,7 +236,7 @@ li:hover {
 	justify-content: center;
 	align-items: center;
 	gap: 21px;
-    margin-bottom: 38px;
+	margin-bottom: 38px;
 }
 
 .banner p {
@@ -268,17 +268,17 @@ li:hover {
 }
 
 .modification {
-font-family: "Work Sans";
-font-size: 14px;
-font-weight: 400;
+	font-family: "Work Sans";
+	font-size: 14px;
+	font-weight: 400;
 }
 
 .modification i {
 	margin-right: 8px;
 }
 
-.first-modification {
-	margin: 15px 0 108px 57px;
+section a {
+	margin: 15px 0 58px 57px;
 }
 
 .my-project {
@@ -290,9 +290,152 @@ font-weight: 400;
 	margin: auto;
 }
 
-.my-project h2 {
-	
+#introduction div {
+	display: flex;
+	align-items: center;
 }
+
+#introduction {
+	display: flex;
+	flex-direction: column;
+}
+
+a {
+	color: #000000;
+	text-decoration: none;
+}
+
+/* Modif modale*/
+#modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.modal-wrapper {
+	background-color: rgb(255 255 255);
+	width: 50%;
+	height: 80%;
+
+	position: relative;
+}
+
+.button-close {
+	background-color: #FFFFFF;
+	border: none;
+	padding: 0;
+	width: 2.5vw;
+	height: 2.5vw;
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 1.5% 2% 0 0;
+}
+
+.button-close i {
+	font-size: 1.5vw;
+}
+
+#modal h1 {
+	color: #000;
+	text-align: center;
+	font-family: "Work Sans";
+	font-size: 2vw;
+	font-weight: 400;
+	height: 17%;
+	align-items: center;
+    justify-content: center;
+}
+
+.gallery-modal {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	gap: 2%;
+	width: 70%;
+	height: 60%;
+	margin: auto;
+	border-bottom: 0.1vw #B3B3B3 solid;
+}
+
+.modal-wrapper figure {
+	width: 18%;
+	height: 32%;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.modal-wrapper figcaption {
+	font-family: "Work Sans";
+	font-size: 0.8vw;
+	margin-top: 3%;
+
+}
+
+.modal-wrapper img {
+	width: 100%;
+	height: 85%;
+}
+
+.modal-wrapper figure div {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 4% 4% 0 0;
+	display: flex;
+	flex-direction: row-reverse;
+	gap: 15%;
+}
+
+.modal-wrapper figure i {
+	font-size: 0.5vw;
+	color: #FFFFFF;
+	background-color: #000;
+	padding: 0.2vw 0.3vw;
+	border-radius: 0.15vw;
+}
+
+.button-add-delete {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2vw;
+	height: 20%;
+}
+
+.button-add-img {
+	margin-top: 2vw;
+	border-radius: 1.5vw;
+	background: #1D6154;
+	border: none;
+	color: #FFFFFF;
+	color: #FFF;
+	font-family: "Syne";
+	font-size: 1vw;
+	font-weight: 700;
+	width: 20vw;
+	height: 3vw;
+}
+
+.button-delete-all {
+	border: none;
+	background-color: transparent;
+	color: #D65353;
+	font-family: "Syne";
+	font-size: 1vw;
+	font-weight: 400;
+}
+
 /*Fin modif */
 nav ul {
 	display: flex;
@@ -304,11 +447,6 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
-}
-
-#introduction {
-	display: flex;
-	align-items: center;
 }
 
 #introduction figure {
