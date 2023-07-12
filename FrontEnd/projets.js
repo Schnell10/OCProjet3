@@ -96,9 +96,8 @@ createButton()
 //On les rend fonctionnels
 buttonFunctional()
 
-
+//fonction pour modifier la page Admin
 function generatePageAdmin() {
-
     // Génération du html de la baniere
     const baliseHeader = document.querySelector("header")
     const baliseBanner = document.createElement("div")
@@ -116,7 +115,7 @@ function generatePageAdmin() {
     baliseBanner.appendChild(baliseButton)
     baliseHeader.prepend(baliseBanner)
 
-    //Génération du html pour le modification 1
+    //Génération du html pour le lien 1 vers modal 
     const baliseIntroduction = document.querySelector("#introduction div")
     const baliseAFirstModif = document.createElement("a")
     const baliseIFirstModif = document.createElement("i")
@@ -130,25 +129,51 @@ function generatePageAdmin() {
     baliseAFirstModif.insertAdjacentText("beforeend", textBaliseAModif)
     baliseIntroduction.insertAdjacentElement("afterend", baliseAFirstModif)
 
-    //Génération du html pour le modification 2
+    //Génération du html pour le 2 vers modal
     const baliseMyProject = document.querySelector(".my-project")
-    const balisePSecondModif = document.createElement("p")
+    const baliseASecondModif = document.createElement("a")
     const baliseISecondModif = document.createElement("i")
-    balisePSecondModif.classList.add("modification")
-    balisePSecondModif.classList.add("Second-modification")
+    baliseASecondModif.classList.add("modification")
+    baliseASecondModif.classList.add("Second-modification")
+    baliseASecondModif.setAttribute("href", "#modal")
     baliseISecondModif.classList.add("fa-regular")
     baliseISecondModif.classList.add("fa-pen-to-square")
-    balisePSecondModif.appendChild(baliseISecondModif)
-    balisePSecondModif.insertAdjacentText("beforeend", textBaliseAModif)
-    baliseMyProject.appendChild(balisePSecondModif)
+    baliseASecondModif.appendChild(baliseISecondModif)
+    baliseASecondModif.insertAdjacentText("beforeend", textBaliseAModif)
+    baliseMyProject.appendChild(baliseASecondModif)
 }
+
+//fonction pour génèrer la page admin
+function generateAdminWebPage() {
+    const token = sessionStorage.getItem("token")
+    if (token !== null) {
+        const baliseLoginLogout = document.querySelector(".loginLogout")
+        //création du bouton logout
+        baliseLoginLogout.innerText = ""
+        baliseLoginLogout.innerText = "Logout"
+        //On écoute le bouton logout pour supprimer le token dans le sessionstorage lorsque on click dessus donc on se déconnecte de l'administrateur
+        baliseLoginLogout.addEventListener("click", function () {
+            sessionStorage.removeItem("token")
+            //rechargement de la page pour mettre à jour le storage
+            location.reload()
+            console.log(token)
+        })
+        //On appel les fonction qui vont générer la nouvelle page admin
+        generatePageAdmin()
+
+    }
+}
+
+//On génère la page admin
+generateAdminWebPage()
+
 
 //Création de la fonction pour la fenêtre modal
 function generateModal() {
     const baliseIntroduction = document.querySelector("#introduction")
     const baliseAside = document.createElement("aside")
     const baliseDivWrapper = document.createElement("div")
-    const baliseButtonClose = document.createElement("button")
+    const baliseButtonCloseModal = document.createElement("button")
     const baliseIClose = document.createElement("i")
     const baliseH1 = document.createElement("h1")
     const baliseDivGallery = document.createElement("div")
@@ -162,19 +187,20 @@ function generateModal() {
     baliseIClose.classList.add("fa-solid")
     baliseIClose.classList.add("fa-xmark")
     baliseDivGallery.classList.add("gallery-modal")
-    baliseButtonClose.classList.add("button-close")
+    baliseButtonCloseModal.classList.add("js-close-modal")
     baliseButtonAdd.classList.add("button-add-img")
     baliseButtonDelete.classList.add("button-delete-all")
     baliseDivButtonAddDelete.classList.add("button-add-delete")
     baliseH1.setAttribute("id", "titleModal")
+    baliseAside.setAttribute("aria-modal", "false")
     baliseAside.setAttribute("aria-labelledby", "titleModal")
     baliseH1.innerText = "Galerie photo"
     baliseButtonAdd.innerText = "Ajouter une photo"
     baliseButtonDelete.innerText = "Supprimer la galerie"
-    baliseButtonClose.appendChild(baliseIClose)
+    baliseButtonCloseModal.appendChild(baliseIClose)
     baliseDivButtonAddDelete.appendChild(baliseButtonAdd)
     baliseDivButtonAddDelete.appendChild(baliseButtonDelete)
-    baliseDivWrapper.appendChild(baliseButtonClose)
+    baliseDivWrapper.appendChild(baliseButtonCloseModal)
     baliseDivWrapper.appendChild(baliseH1)
     baliseDivWrapper.appendChild(baliseDivGallery)
     baliseDivWrapper.appendChild(baliseDivButtonAddDelete)
@@ -209,44 +235,53 @@ function generateWorkModal() {
 
         const baliseDivParent = document.querySelector(".modal-wrapper div")
         baliseDivParent.appendChild(baliseFigure)
-
-}
+    }
 }
 
 generateWorkModal()
 
+// On rend dynamique la page modal//
 
+//création des fonction ouvrir/fermer modal//
+let modal = null
 
-//fonction pour génèrer la page admin
-function generateAdminWebPage() {
-    const token = sessionStorage.getItem("token")
-    if (token !== null) {
-        document.querySelector(".loginLogout").innerHTML = ""
-        //création du bouton logout
-        const baliseLoginLogout = document.querySelector(".loginLogout")
-        baliseLoginLogout.innerText = "Logout"
-        //On écoute le bouton logout pour supprimer le token dans le sessionstorage lorsque on click dessus donc on se déconnecte de l'administrateur
-        baliseLoginLogout.addEventListener("click", function () {
-            sessionStorage.removeItem("token")
-            //rechargement de la page pour mettre à jour le storage
-            location.reload()
-            console.log(token)
+function openModal() {
+    const listLienModal = document.querySelectorAll(".modification")
+    listLienModal.forEach(a => {
+        a.addEventListener("click", () => {
+            if (modal === null) {
+                modal = document.querySelector("aside")
+                modal.removeAttribute("aria-hidden")
+                modal.setAttribute("aria-modal", "true")
+            }
         })
-        //on génére la bannière
-        generatePageAdmin()
-
-    }
+    })
 }
 
-//On génère la page admin
-generateAdminWebPage()
+function closeModal() {
+    const buttonCloseModal = document.querySelector(".js-close-modal")
+    buttonCloseModal.addEventListener("click", () => {
+        if (modal === null) return
+        modal = document.querySelector("aside")
+        modal.setAttribute("aria-hidden", "true")
+        modal.removeAttribute("aria-modal", "false")
+        modal = null
+    })
 
+    // On supprime la propagation pour que la modal ne se ferme pas lorsque l'on clic dessus
+    document.querySelector(".modal-wrapper").addEventListener("click", (event) => {
+        event.stopPropagation()
+    })
+    const asideModal = document.querySelector("aside")
+    asideModal.addEventListener("click", () => {
+        if (modal === null) return
+        modal = document.querySelector("aside")
+        modal.setAttribute("aria-hidden", "true")
+        modal.removeAttribute("aria-modal", "false")
+        modal = null
+    })
+}
 
-
-
-
-
-
-
-
-
+//On lence les fonction pour ouvrir/fermer la modal
+openModal()
+closeModal()
