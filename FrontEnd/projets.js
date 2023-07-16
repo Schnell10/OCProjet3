@@ -26,7 +26,6 @@ function createButton() {
     divButtons.appendChild(baliseButtonHotelRestaurant)
 }
 
-
 //Création du visuel de la partie "Projets"
 function generateWorks(works) {
     for (let i = 0; i < works.length; i++) {
@@ -46,6 +45,7 @@ function generateWorks(works) {
         const gallery = document.querySelector(".gallery")
         gallery.appendChild(baliseFigure)
     }
+
 }
 
 //Création de la fonction pour rendre les filtre fonctionnels
@@ -168,48 +168,77 @@ function generateAdminWebPage() {
 generateAdminWebPage()
 
 
-//Création de la fonction pour la fenêtre modal
+
+//On créé la modal
+
+
 function generateModal() {
+    //Mise en place des balise principal de la modal (aside/divwrapper)
     const baliseIntroduction = document.querySelector("#introduction")
     const baliseAside = document.createElement("aside")
     const baliseDivWrapper = document.createElement("div")
+    baliseDivWrapper.classList.add("modal-wrapper")
+    baliseAside.appendChild(baliseDivWrapper)
+    baliseIntroduction.insertAdjacentElement("afterend", baliseAside)
+    //Mise en place les composent identique au 2 modal
     const baliseButtonCloseModal = document.createElement("button")
     const baliseIClose = document.createElement("i")
-    const baliseH1 = document.createElement("h1")
+    const baliseH3 = document.createElement("h3")
     const baliseDivGallery = document.createElement("div")
+    baliseIClose.classList.add("fa-solid")
+    baliseIClose.classList.add("fa-xmark")
+    baliseButtonCloseModal.classList.add("js-close-modal")
+    baliseH3.setAttribute("id", "titleModal")
+    baliseDivGallery.classList.add("gallery-modal")
+    baliseH3.innerText = "Galerie photo"
+    baliseButtonCloseModal.appendChild(baliseIClose)
+    baliseDivWrapper.appendChild(baliseButtonCloseModal)
+    baliseDivWrapper.appendChild(baliseH3)
+    baliseDivWrapper.appendChild(baliseDivGallery)
+    //On créer les composant de la premiere modal
     const baliseButtonAdd = document.createElement("button")
     const baliseButtonDelete = document.createElement("button")
     const baliseDivButtonAddDelete = document.createElement("div")
     baliseAside.setAttribute("id", "modal")
-    baliseDivWrapper.classList.add("modal-wrapper")
     baliseAside.setAttribute("aria-hidden", "true")
     baliseAside.setAttribute("role", "dialogue")
-    baliseIClose.classList.add("fa-solid")
-    baliseIClose.classList.add("fa-xmark")
-    baliseDivGallery.classList.add("gallery-modal")
-    baliseButtonCloseModal.classList.add("js-close-modal")
+    baliseAside.setAttribute("aria-modal", "false")
+    baliseAside.setAttribute("aria-labelledby", "titleModal")
     baliseButtonAdd.classList.add("button-add-img")
     baliseButtonDelete.classList.add("button-delete-all")
     baliseDivButtonAddDelete.classList.add("button-add-delete")
-    baliseH1.setAttribute("id", "titleModal")
-    baliseAside.setAttribute("aria-modal", "false")
-    baliseAside.setAttribute("aria-labelledby", "titleModal")
-    baliseH1.innerText = "Galerie photo"
     baliseButtonAdd.innerText = "Ajouter une photo"
     baliseButtonDelete.innerText = "Supprimer la galerie"
-    baliseButtonCloseModal.appendChild(baliseIClose)
     baliseDivButtonAddDelete.appendChild(baliseButtonAdd)
     baliseDivButtonAddDelete.appendChild(baliseButtonDelete)
-    baliseDivWrapper.appendChild(baliseButtonCloseModal)
-    baliseDivWrapper.appendChild(baliseH1)
-    baliseDivWrapper.appendChild(baliseDivGallery)
     baliseDivWrapper.appendChild(baliseDivButtonAddDelete)
-    baliseAside.appendChild(baliseDivWrapper)
-    baliseIntroduction.insertAdjacentElement("afterend", baliseAside)
 }
-generateModal()
 
-// On génére les cards de la modal
+//Modal2
+function generateModal2() {
+    const baliseAside = document.querySelector("aside")
+    const baliseDivWrapperModal2 = document.createElement("div")
+    const baliseButtonCloseModal = document.createElement("button")
+    const baliseIClose = document.createElement("i")
+    const baliseH3 = document.createElement("h3")
+    const baliseForm = document.createElement("form")
+    const baliseButton = document.createElement("button")
+    baliseDivWrapperModal2.classList.add("modal-wrapper-2")
+    baliseDivWrapperModal2.classList.add("modal-2-invisible")
+    baliseButton.innerText = "Valider"
+    baliseH3.innerText = "Ajouter une photo"
+    baliseIClose.classList.add("fa-solid")
+    baliseIClose.classList.add("fa-xmark")
+    baliseButtonCloseModal.classList.add("js-close-modal2")
+    baliseDivWrapperModal2.appendChild(baliseButtonCloseModal)
+    baliseDivWrapperModal2.appendChild(baliseH3)
+    baliseDivWrapperModal2.appendChild(baliseForm)
+    baliseDivWrapperModal2.appendChild(baliseButton)
+    baliseAside.appendChild(baliseDivWrapperModal2)
+}
+
+
+// On génére les cards de la modal1
 function generateWorkModal() {
     for (let i = 0; i < works.length; i++) {
         // Création d'une carte de la liste works
@@ -235,18 +264,63 @@ function generateWorkModal() {
 
         const baliseDivParent = document.querySelector(".modal-wrapper div")
         baliseDivParent.appendChild(baliseFigure)
+
+        //On rend la possibilité de supprimer une card en cliquant sur l'icone poubelle
+        const token = window.sessionStorage.getItem("token")
+        const id = card.id
+
+        async function deleteWork() {
+            await fetch(`http://localhost:5678/api/works/${id}`, {
+                method: "DELETE",
+                headers: {
+                    accept: "*/*",
+                    Authorization: `Bearer ${token}`
+                }
+            })
+                .then(reponse => {
+                    if (reponse.ok) {
+                        console.log("Card supprimé")
+                    } else {
+                        console.log("eErreur lors de la suppression")
+                    }
+                })
+                .catch(error => {
+                    console.log("Il y a une erreur")
+                })
+        }
+        baliseTrash.addEventListener("click", () => {
+            deleteWork()
+            //On supprime les card dans la gallery sans rafraichir la page
+            const baliseImgCardList = document.querySelectorAll(`img[src="${card.imageUrl}"]`)
+            baliseImgCardList[0].parentNode.remove()
+            baliseImgCardList[1].parentNode.remove()
+        })
     }
+
 }
 
+//On lence les 3 fonctions afin de créer la base modal principal, d'y ajouter les work et de pouvoir les supprimer sans raffraichir
+
+generateModal()
 generateWorkModal()
+
+generateModal2()
 
 // On rend dynamique la page modal//
 
 //création des fonction ouvrir/fermer modal//
 let modal = null
+function closeModal() {
+    if (modal === null) return
+    modal = document.querySelector("aside")
+    modal.setAttribute("aria-hidden", "true")
+    modal.removeAttribute("aria-modal", "false")
+    modal = null
+}
 
-function openModal() {
+function openCloseModal() {
     const listLienModal = document.querySelectorAll(".modification")
+    //On ouvre la modal lorsqu'on click sur un lieu modifier
     listLienModal.forEach(a => {
         a.addEventListener("click", () => {
             if (modal === null) {
@@ -256,32 +330,59 @@ function openModal() {
             }
         })
     })
-}
-
-function closeModal() {
-    const buttonCloseModal = document.querySelector(".js-close-modal")
-    buttonCloseModal.addEventListener("click", () => {
-        if (modal === null) return
-        modal = document.querySelector("aside")
-        modal.setAttribute("aria-hidden", "true")
-        modal.removeAttribute("aria-modal", "false")
-        modal = null
+    //On ferme la modal lorsque l'on clic sur la croix 
+    const baliseListButtonCloseModal = document.querySelector(".js-close-modal")
+    baliseListButtonCloseModal.addEventListener("click", () => {
+        closeModal()
     })
 
-    // On supprime la propagation pour que la modal ne se ferme pas lorsque l'on clic dessus
+
+    // On supprime la propagation pour que la modal ne se ferme pas lorsqu'on clic dessus
     document.querySelector(".modal-wrapper").addEventListener("click", (event) => {
         event.stopPropagation()
-    })
-    const asideModal = document.querySelector("aside")
-    asideModal.addEventListener("click", () => {
-        if (modal === null) return
-        modal = document.querySelector("aside")
-        modal.setAttribute("aria-hidden", "true")
-        modal.removeAttribute("aria-modal", "false")
-        modal = null
+        //On la ferme lorsqu'on clic à l'extérieur
+        document.querySelector("aside").addEventListener("click", () => {
+            closeModal()
+        })
     })
 }
+openCloseModal()
 
-//On lence les fonction pour ouvrir/fermer la modal
-openModal()
-closeModal()
+//On change la modal lorsque on clic sur "ajouter une photo" en rendant invisible la 1 pour rendre visible l  la 2
+
+document.querySelector(".button-add-img").addEventListener("click", () => {
+    const baliseModalWrapper = document.querySelector(".modal-wrapper")
+    const baliseModalWrapper2 = document.querySelector(".modal-wrapper-2")
+    baliseModalWrapper.classList.add("modal-1-invisible")
+    baliseModalWrapper2.classList.remove("modal-2-invisible")
+
+    //On ferme la modal lorsque l'on clic sur la croix 
+    const baliseListButtonCloseModal = document.querySelector(".js-close-modal")
+    baliseListButtonCloseModal.addEventListener("click", () => {
+        closeModal()
+        //et on revient au début en rendant display none à la 2 et pas la 1
+        baliseModalWrapper.classList.remove("modal-1-invisible")
+        baliseModalWrapper2.classList.add("modal-2-invisible")
+    })
+
+
+    // On supprime la propagation pour que la modal ne se ferme pas lorsqu'on clic dessus
+    document.querySelector(".modal-wrapper").addEventListener("click", (event) => {
+        event.stopPropagation()
+        //On la ferme lorsqu'on clic à l'extérieur
+        document.querySelector("aside").addEventListener("click", () => {
+            closeModal()
+            //et on revient au début en rendant display none à la 2 et pas la 1
+            baliseModalWrapper.classList.remove("modal-1-invisible")
+            baliseModalWrapper2.classList.add("modal-2-invisible")
+        })
+    })
+
+})
+
+
+
+
+
+
+

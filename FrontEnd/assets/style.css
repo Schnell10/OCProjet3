@@ -318,7 +318,7 @@ aside {
 	justify-content: center;
 }
 
-.modal-wrapper {
+.modal-wrapper, .modal-wrapper-2 {
 	background-color: rgb(255 255 255);
 	width: 50%;
 	height: 80%;
@@ -349,13 +349,14 @@ aside {
 	font-size: 1.5vw;
 }
 
-#modal h1 {
+#modal h3 {
 	color: #000;
 	text-align: center;
 	font-family: "Work Sans";
 	font-size: 2vw;
 	font-weight: 400;
 	height: 17%;
+	display: flex;
 	align-items: center;
     justify-content: center;
 }
@@ -378,6 +379,14 @@ aside {
 	display: flex;
 	flex-direction: column;
 	position: relative;
+}
+
+.fa-arrows-up-down-left-right {
+	display: none;
+}
+
+.modal-wrapper figure:hover .fa-arrows-up-down-left-right {
+	display: block;
 }
 
 .modal-wrapper figcaption {
@@ -443,12 +452,19 @@ aside {
 }
 
 
-.modal-wrapper img:hover .fa-arrows-up-down-left-right {
-	
-}
 
 /*rend invisible/visible la modal*/
 aside[aria-hidden] {
+	display: none;
+}
+
+/* on rend invisible la modal 2*/
+.modal-2-invisible {
+	display: none;
+}
+
+/* On rend invisible la modal 1 */
+.modal-1-invisible {
 	display: none;
 }
 
