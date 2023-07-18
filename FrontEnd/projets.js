@@ -105,8 +105,7 @@ function generatePageAdmin() {
     const baliseP = document.createElement("p")
     const baliseI = document.createElement("i")
     const baliseButton = document.createElement("button")
-    baliseI.classList.add("fa-regular")
-    baliseI.classList.add("fa-pen-to-square")
+    baliseI.classList.add("fa-regular", "fa-pen-to-square")
     baliseP.appendChild(baliseI)
     const textBaliseP = "Mon édition"
     baliseP.insertAdjacentText("beforeend", textBaliseP) //on utilise insertAdjacentHTML pour ajouter du text dans la balise p sans supprimer l'intérieur de la balise
@@ -123,8 +122,7 @@ function generatePageAdmin() {
     baliseAFirstModif.classList.add("modification")
     baliseAFirstModif.classList.add("first-modification")
     baliseAFirstModif.setAttribute("href", "#modal")
-    baliseIFirstModif.classList.add("fa-regular")
-    baliseIFirstModif.classList.add("fa-pen-to-square")
+    baliseIFirstModif.classList.add("fa-regular", "fa-pen-to-square")
     baliseAFirstModif.appendChild(baliseIFirstModif)
     baliseAFirstModif.insertAdjacentText("beforeend", textBaliseAModif)
     baliseIntroduction.insertAdjacentElement("afterend", baliseAFirstModif)
@@ -136,8 +134,7 @@ function generatePageAdmin() {
     baliseASecondModif.classList.add("modification")
     baliseASecondModif.classList.add("Second-modification")
     baliseASecondModif.setAttribute("href", "#modal")
-    baliseISecondModif.classList.add("fa-regular")
-    baliseISecondModif.classList.add("fa-pen-to-square")
+    baliseISecondModif.classList.add("fa-regular", "fa-pen-to-square")
     baliseASecondModif.appendChild(baliseISecondModif)
     baliseASecondModif.insertAdjacentText("beforeend", textBaliseAModif)
     baliseMyProject.appendChild(baliseASecondModif)
@@ -173,20 +170,18 @@ generateAdminWebPage()
 
 
 function generateModal() {
-    //Mise en place des balise principal de la modal (aside/divwrapper)
+    //Mise en place de la modal
     const baliseIntroduction = document.querySelector("#introduction")
     const baliseAside = document.createElement("aside")
     const baliseDivWrapper = document.createElement("div")
     baliseDivWrapper.classList.add("modal-wrapper")
     baliseAside.appendChild(baliseDivWrapper)
     baliseIntroduction.insertAdjacentElement("afterend", baliseAside)
-    //Mise en place les composent identique au 2 modal
     const baliseButtonCloseModal = document.createElement("button")
     const baliseIClose = document.createElement("i")
     const baliseH3 = document.createElement("h3")
     const baliseDivGallery = document.createElement("div")
-    baliseIClose.classList.add("fa-solid")
-    baliseIClose.classList.add("fa-xmark")
+    baliseIClose.classList.add("fa-solid", "fa-xmark")
     baliseButtonCloseModal.classList.add("js-close-modal")
     baliseH3.setAttribute("id", "titleModal")
     baliseDivGallery.classList.add("gallery-modal")
@@ -195,7 +190,6 @@ function generateModal() {
     baliseDivWrapper.appendChild(baliseButtonCloseModal)
     baliseDivWrapper.appendChild(baliseH3)
     baliseDivWrapper.appendChild(baliseDivGallery)
-    //On créer les composant de la premiere modal
     const baliseButtonAdd = document.createElement("button")
     const baliseButtonDelete = document.createElement("button")
     const baliseDivButtonAddDelete = document.createElement("div")
@@ -219,24 +213,85 @@ function generateModal2() {
     const baliseAside = document.querySelector("aside")
     const baliseDivWrapperModal2 = document.createElement("div")
     const baliseButtonCloseModal = document.createElement("button")
+    const baliseButtonArrow = document.createElement("button")
     const baliseIClose = document.createElement("i")
+    const baliseIArrow = document.createElement("i")
     const baliseH3 = document.createElement("h3")
     const baliseForm = document.createElement("form")
-    const baliseButton = document.createElement("button")
     baliseDivWrapperModal2.classList.add("modal-wrapper-2")
     baliseDivWrapperModal2.classList.add("modal-2-invisible")
-    baliseButton.innerText = "Valider"
     baliseH3.innerText = "Ajouter une photo"
-    baliseIClose.classList.add("fa-solid")
-    baliseIClose.classList.add("fa-xmark")
+    baliseIClose.classList.add("fa-solid", "fa-xmark")
+    baliseIArrow.classList.add("fa-solid", "fa-arrow-left")
     baliseButtonCloseModal.classList.add("js-close-modal2")
+    baliseButtonArrow.classList.add("js-arrow-modal2")
+    baliseButtonCloseModal.appendChild(baliseIClose)
+    baliseButtonArrow.appendChild(baliseIArrow)
+    baliseDivWrapperModal2.appendChild(baliseButtonArrow)
     baliseDivWrapperModal2.appendChild(baliseButtonCloseModal)
     baliseDivWrapperModal2.appendChild(baliseH3)
     baliseDivWrapperModal2.appendChild(baliseForm)
-    baliseDivWrapperModal2.appendChild(baliseButton)
     baliseAside.appendChild(baliseDivWrapperModal2)
 }
 
+// Création du formulaire modal 2
+function createFromModal2() {
+const baliseForm= document.querySelector(".modal-wrapper-2 form")
+const baliseFieldset = document.createElement("fieldset")
+const baliseIMontain = document.createElement("i")
+const baliseLabelFile = document.createElement("label")
+const baliseInputFile = document.createElement("input")
+const baliseP = document.createElement("p")
+const baliseLabelTitle = document.createElement("label")
+const baliseInputTitle = document.createElement("input")
+const baliseLabelCategory = document.createElement("label")
+const baliseSelect = document.createElement("select")
+const baliseOptionObject = document.createElement("option")
+const baliseOptionAppartment = document.createElement("option")
+const baliseOptionHotel = document.createElement("option")
+const baliseInputValidation = document.createElement("input")
+const baliseDivInputSubmit = document.createElement("div")
+baliseIMontain.classList.add("fa-regular", "fa-image")
+baliseInputValidation.classList.add("button-submit-form")
+baliseLabelFile.setAttribute("for", "imgUrl")
+baliseInputFile.setAttribute("type", "file")
+baliseInputFile.setAttribute("id", "imgUrl")
+baliseInputFile.setAttribute("name", "imgUrl")
+baliseInputFile.setAttribute("accept", ".jpg, .png")
+baliseLabelTitle.setAttribute("for", "title")
+baliseInputTitle.setAttribute("type", "text")
+baliseInputTitle.setAttribute("id", "title")
+baliseInputTitle.setAttribute("name", "title")
+baliseLabelCategory.setAttribute("for", "categoryId")
+baliseSelect.setAttribute("id", "categoryId")
+baliseSelect.setAttribute("name", "categoryId")
+baliseOptionObject.setAttribute("value", "Objets")
+baliseOptionAppartment.setAttribute("value", "Appartements")
+baliseOptionHotel.setAttribute("value", "Hôtels & Restaurants")
+baliseInputValidation.setAttribute("type", "submit")
+baliseInputValidation.setAttribute("value", "Valider")
+baliseLabelFile.innerText = "+ Ajouter une photo"
+baliseP.innerText = "jpg png: 4mo max"
+baliseLabelTitle.innerText = "Titre"
+baliseLabelCategory.innerText = "Catégorie"
+baliseOptionObject.innerText = "Objets"
+baliseOptionAppartment.innerText = "Appartements"
+baliseOptionHotel.innerText = "Hôtels & Restaurants"
+baliseFieldset.appendChild(baliseIMontain)
+baliseFieldset.appendChild(baliseLabelFile)
+baliseFieldset.appendChild(baliseInputFile)
+baliseFieldset.appendChild(baliseP)
+baliseSelect.appendChild(baliseOptionObject)
+baliseSelect.appendChild(baliseOptionAppartment)
+baliseSelect.appendChild(baliseOptionHotel)
+baliseDivInputSubmit.appendChild(baliseInputValidation)
+baliseForm.appendChild(baliseFieldset)
+baliseForm.appendChild(baliseLabelTitle)
+baliseForm.appendChild(baliseInputTitle)
+baliseForm.appendChild(baliseLabelCategory)
+baliseForm.appendChild(baliseSelect)
+baliseForm.appendChild(baliseDivInputSubmit)
+}
 
 // On génére les cards de la modal1
 function generateWorkModal() {
@@ -252,10 +307,8 @@ function generateWorkModal() {
         const baliseDivIcons = document.createElement("div")
         const baliseTrash = document.createElement("i")
         const baliseArrow = document.createElement("i")
-        baliseTrash.classList.add("fa-solid")
-        baliseTrash.classList.add("fa-trash-can")
-        baliseArrow.classList.add("fa-solid")
-        baliseArrow.classList.add("fa-arrows-up-down-left-right")
+        baliseTrash.classList.add("fa-solid", "fa-trash-can")
+        baliseArrow.classList.add("fa-solid", "fa-arrows-up-down-left-right")
         baliseFigure.appendChild(baliseImg)
         baliseFigure.appendChild(baliseFigcaption)
         baliseDivIcons.appendChild(baliseTrash)
@@ -305,6 +358,7 @@ generateModal()
 generateWorkModal()
 
 generateModal2()
+createFromModal2()
 
 // On rend dynamique la page modal//
 
@@ -357,7 +411,7 @@ document.querySelector(".button-add-img").addEventListener("click", () => {
     baliseModalWrapper2.classList.remove("modal-2-invisible")
 
     //On ferme la modal lorsque l'on clic sur la croix 
-    const baliseListButtonCloseModal = document.querySelector(".js-close-modal")
+    const baliseListButtonCloseModal = document.querySelector(".js-close-modal2")
     baliseListButtonCloseModal.addEventListener("click", () => {
         closeModal()
         //et on revient au début en rendant display none à la 2 et pas la 1
@@ -367,7 +421,7 @@ document.querySelector(".button-add-img").addEventListener("click", () => {
 
 
     // On supprime la propagation pour que la modal ne se ferme pas lorsqu'on clic dessus
-    document.querySelector(".modal-wrapper").addEventListener("click", (event) => {
+    document.querySelector(".modal-wrapper-2").addEventListener("click", (event) => {
         event.stopPropagation()
         //On la ferme lorsqu'on clic à l'extérieur
         document.querySelector("aside").addEventListener("click", () => {
@@ -376,6 +430,13 @@ document.querySelector(".button-add-img").addEventListener("click", () => {
             baliseModalWrapper.classList.remove("modal-1-invisible")
             baliseModalWrapper2.classList.add("modal-2-invisible")
         })
+    })
+
+    //On revien à la modal 1 lorsqu'on clic sur la flèche
+
+    document.querySelector(".js-arrow-modal2").addEventListener("click", () => {
+        baliseModalWrapper.classList.remove("modal-1-invisible")
+        baliseModalWrapper2.classList.add("modal-2-invisible")
     })
 
 })
