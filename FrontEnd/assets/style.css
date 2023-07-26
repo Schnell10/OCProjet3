@@ -327,7 +327,7 @@ aside {
 .modal-wrapper,
 .modal-wrapper-2 {
 	background-color: rgb(255 255 255);
-	width: 50%;
+	width: 700px;
 	height: 670px;
 	min-width: 181px;
 	position: relative;
@@ -392,15 +392,6 @@ aside figure i {
 
 }
 
-/*On fait disparaitre l'icone fleché et apparaitre au survol de l'image*/
-.fa-arrows-up-down-left-right {
-	display: none;
-}
-
-figure:hover .fa-arrows-up-down-left-right {
-	display: inline;
-}
-
 .modal-wrapper figcaption {
 	font-family: "Work Sans";
 	font-size: 12px;
@@ -413,7 +404,7 @@ figure:hover .fa-arrows-up-down-left-right {
 	height: 85%;
 }
 
-.modal-wrapper figure div {
+.arrow-trash {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -430,6 +421,16 @@ figure:hover .fa-arrows-up-down-left-right {
 	border-radius: 3px;
 	padding: 3px 4px 3px 4px;
 }
+
+/*On fait disparaitre l'icone fleché et apparaitre au survol de l'image*/
+.arrow {
+	display: none;
+}
+
+figure:hover .arrow {
+	display: inline;
+}
+
 
 .button-add-delete {
 	display: flex;
@@ -464,7 +465,10 @@ figure:hover .fa-arrows-up-down-left-right {
 	padding: 0;
 }
 
-
+/*On rend invisible l'aside (toute modal)*/
+.invisible-modal {
+	display: none;
+}
 
 /*rend invisible/visible la modal*/
 aside[aria-hidden] {
@@ -590,7 +594,6 @@ fieldset p {
 	background: #A7A7A7;
 	border: none;
 	color: #FFFFFF;
-	color: #FFF;
 	font-family: "Syne";
 	font-size: 14px;
 	font-weight: 700;
@@ -600,7 +603,28 @@ fieldset p {
 	padding-top: 25px;
 	border-top: 0.1vw #B3B3B3 solid;
 }
+/* Modif message trop volumineux*/
+.too-big {
+	margin-top: 5px;
+	color: #D65353;
+	font-size: 13px;
+}
+/*Modif message succés*/
+.modal-wrapper-2 form div p {
+	text-align: center;
+	font-family: 'Syne';
+    font-weight: 500;
+	color: #D65353;
+}
 
+/*On grise le bouton submit lorsque les champs ne sont pas remplies*/
+input[disabled] {
+	background-color: #A7A7A7;
+}
+
+.button-submit-form {
+	background-color: #1D6154;
+	}
 /*Fin modif */
 nav ul {
 	display: flex;
@@ -694,11 +718,13 @@ input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
-	background-color: #1D6154;
 	margin: 2em auto;
 	width: 180px;
 	text-align: center;
 	border-radius: 60px;
+}
+section input[type="submit"] {
+background-color: #1D6154;
 }
 
 footer nav ul {

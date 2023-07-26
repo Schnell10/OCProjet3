@@ -148,7 +148,7 @@ function generateAdminWebPage() {
         //création du bouton logout
         baliseLoginLogout.innerText = ""
         baliseLoginLogout.innerText = "Logout"
-        //On écoute le bouton logout pour supprimer le token dans le sessionstorage lorsque on click dessus donc on se déconnecte de l'administrateur
+        //On écoute le bouton logout pour supprimer le token dans le sessionstorage lorsque on click dessus et donc on se déconnecte de l'administrateur
         baliseLoginLogout.addEventListener("click", function () {
             sessionStorage.removeItem("token")
             //rechargement de la page pour mettre à jour le storage
@@ -236,61 +236,65 @@ function generateModal2() {
 
 // Création du formulaire modal 2
 function createFromModal2() {
-const baliseForm= document.querySelector(".modal-wrapper-2 form")
-const baliseFieldset = document.createElement("fieldset")
-const baliseIMontain = document.createElement("i")
-const baliseLabelFile = document.createElement("label")
-const baliseInputFile = document.createElement("input")
-const baliseP = document.createElement("p")
-const baliseLabelTitle = document.createElement("label")
-const baliseInputTitle = document.createElement("input")
-const baliseLabelCategory = document.createElement("label")
-const baliseSelect = document.createElement("select")
-const baliseOptionObject = document.createElement("option")
-const baliseOptionAppartment = document.createElement("option")
-const baliseOptionHotel = document.createElement("option")
-const baliseInputValidation = document.createElement("input")
-const baliseDivInputSubmit = document.createElement("div")
-baliseIMontain.classList.add("fa-regular", "fa-image")
-baliseInputValidation.classList.add("button-submit-form")
-baliseLabelFile.setAttribute("for", "imgUrl")
-baliseInputFile.setAttribute("type", "file")
-baliseInputFile.setAttribute("id", "imgUrl")
-baliseInputFile.setAttribute("name", "imgUrl")
-baliseInputFile.setAttribute("accept", ".jpg, .png")
-baliseLabelTitle.setAttribute("for", "title")
-baliseInputTitle.setAttribute("type", "text")
-baliseInputTitle.setAttribute("id", "title")
-baliseInputTitle.setAttribute("name", "title")
-baliseLabelCategory.setAttribute("for", "categoryId")
-baliseSelect.setAttribute("id", "categoryId")
-baliseSelect.setAttribute("name", "categoryId")
-baliseOptionObject.setAttribute("value", "Objets")
-baliseOptionAppartment.setAttribute("value", "Appartements")
-baliseOptionHotel.setAttribute("value", "Hôtels & Restaurants")
-baliseInputValidation.setAttribute("type", "submit")
-baliseInputValidation.setAttribute("value", "Valider")
-baliseLabelFile.innerText = "+ Ajouter une photo"
-baliseP.innerText = "jpg png: 4mo max"
-baliseLabelTitle.innerText = "Titre"
-baliseLabelCategory.innerText = "Catégorie"
-baliseOptionObject.innerText = "Objets"
-baliseOptionAppartment.innerText = "Appartements"
-baliseOptionHotel.innerText = "Hôtels & Restaurants"
-baliseFieldset.appendChild(baliseIMontain)
-baliseFieldset.appendChild(baliseLabelFile)
-baliseFieldset.appendChild(baliseInputFile)
-baliseFieldset.appendChild(baliseP)
-baliseSelect.appendChild(baliseOptionObject)
-baliseSelect.appendChild(baliseOptionAppartment)
-baliseSelect.appendChild(baliseOptionHotel)
-baliseDivInputSubmit.appendChild(baliseInputValidation)
-baliseForm.appendChild(baliseFieldset)
-baliseForm.appendChild(baliseLabelTitle)
-baliseForm.appendChild(baliseInputTitle)
-baliseForm.appendChild(baliseLabelCategory)
-baliseForm.appendChild(baliseSelect)
-baliseForm.appendChild(baliseDivInputSubmit)
+    const baliseForm = document.querySelector(".modal-wrapper-2 form")
+    const baliseFieldset = document.createElement("fieldset")
+    const baliseIMontain = document.createElement("i")
+    const baliseLabelFile = document.createElement("label")
+    const baliseInputFile = document.createElement("input")
+    const baliseP = document.createElement("p")
+    const baliseLabelTitle = document.createElement("label")
+    const baliseInputTitle = document.createElement("input")
+    const baliseLabelCategory = document.createElement("label")
+    const baliseSelect = document.createElement("select")
+    const baliseOptionEmpty = document.createElement("option")
+    const baliseOptionObject = document.createElement("option")
+    const baliseOptionAppartment = document.createElement("option")
+    const baliseOptionHotel = document.createElement("option")
+    const baliseInputValidation = document.createElement("input")
+    const baliseDivInputSubmit = document.createElement("div")
+    const baliseSucess = document.createElement("p")
+    baliseIMontain.classList.add("fa-regular", "fa-image")
+    baliseInputValidation.classList.add("button-submit-form")
+    baliseLabelFile.setAttribute("for", "imgUrl")
+    baliseInputFile.setAttribute("type", "file")
+    baliseInputFile.setAttribute("id", "imgUrl")
+    baliseInputFile.setAttribute("name", "imgUrl")
+    baliseInputFile.setAttribute("accept", ".jpg, .png")
+    baliseLabelTitle.setAttribute("for", "title")
+    baliseInputTitle.setAttribute("type", "text")
+    baliseInputTitle.setAttribute("id", "title")
+    baliseInputTitle.setAttribute("name", "title")
+    baliseLabelCategory.setAttribute("for", "categoryId")
+    baliseSelect.setAttribute("id", "categoryId")
+    baliseSelect.setAttribute("name", "categoryId")
+    baliseOptionObject.setAttribute("value", "1")
+    baliseOptionAppartment.setAttribute("value", "2")
+    baliseOptionHotel.setAttribute("value", "3")
+    baliseInputValidation.setAttribute("type", "submit")
+    baliseInputValidation.setAttribute("value", "Valider")
+    baliseLabelFile.innerText = "+ Ajouter une photo"
+    baliseP.innerText = "jpg png: 4mo max"
+    baliseLabelTitle.innerText = "Titre"
+    baliseLabelCategory.innerText = "Catégorie"
+    baliseOptionObject.innerText = "Objets"
+    baliseOptionAppartment.innerText = "Appartements"
+    baliseOptionHotel.innerText = "Hôtels & Restaurants"
+    baliseFieldset.appendChild(baliseIMontain)
+    baliseFieldset.appendChild(baliseLabelFile)
+    baliseFieldset.appendChild(baliseInputFile)
+    baliseFieldset.appendChild(baliseP)
+    baliseSelect.appendChild(baliseOptionEmpty)
+    baliseSelect.appendChild(baliseOptionObject)
+    baliseSelect.appendChild(baliseOptionAppartment)
+    baliseSelect.appendChild(baliseOptionHotel)
+    baliseDivInputSubmit.appendChild(baliseSucess)
+    baliseDivInputSubmit.appendChild(baliseInputValidation)
+    baliseForm.appendChild(baliseFieldset)
+    baliseForm.appendChild(baliseLabelTitle)
+    baliseForm.appendChild(baliseInputTitle)
+    baliseForm.appendChild(baliseLabelCategory)
+    baliseForm.appendChild(baliseSelect)
+    baliseForm.appendChild(baliseDivInputSubmit)
 }
 
 // On génére les cards de la modal1
@@ -305,29 +309,33 @@ function generateWorkModal() {
         const baliseFigcaption = document.createElement("figcaption")
         baliseFigcaption.innerText = "éditer"
         const baliseDivIcons = document.createElement("div")
+        baliseDivIcons.classList.add("arrow-trash")
         const baliseTrash = document.createElement("i")
+        const baliseDivIconsArrow = document.createElement("div")
+        baliseDivIconsArrow.classList.add("arrow")
         const baliseArrow = document.createElement("i")
         baliseTrash.classList.add("fa-solid", "fa-trash-can")
         baliseArrow.classList.add("fa-solid", "fa-arrows-up-down-left-right")
         baliseFigure.appendChild(baliseImg)
         baliseFigure.appendChild(baliseFigcaption)
         baliseDivIcons.appendChild(baliseTrash)
-        baliseDivIcons.appendChild(baliseArrow)
+        baliseDivIconsArrow.appendChild(baliseArrow)
+        baliseDivIcons.appendChild(baliseDivIconsArrow)
         baliseFigure.appendChild(baliseDivIcons)
 
         const baliseDivParent = document.querySelector(".modal-wrapper div")
         baliseDivParent.appendChild(baliseFigure)
 
         //On rend la possibilité de supprimer une card en cliquant sur l'icone poubelle
-        const token = window.sessionStorage.getItem("token")
+        const token = sessionStorage.getItem("token")
         const id = card.id
 
         async function deleteWork() {
             await fetch(`http://localhost:5678/api/works/${id}`, {
                 method: "DELETE",
                 headers: {
-                    accept: "*/*",
-                    Authorization: `Bearer ${token}`
+                    "accept": "*/*",
+                    "Authorization": `Bearer ${token}`
                 }
             })
                 .then(reponse => {
@@ -364,17 +372,28 @@ createFromModal2()
 
 //création des fonction ouvrir/fermer modal//
 let modal = null
-function closeModal() {
+function closeModal1() {
     if (modal === null) return
     modal = document.querySelector("aside")
     modal.setAttribute("aria-hidden", "true")
     modal.removeAttribute("aria-modal", "false")
     modal = null
 }
+function closeModal2() {
+    if (modal === null) return
+    modal = document.querySelector("aside")
+    modal.setAttribute("aria-hidden", "true")
+    modal.removeAttribute("aria-modal", "false")
+    //On remet les class aux 2 modal afin que lorsque on les ré-ouvres la modal 1 s'affiche en 1er
+    document.querySelector(".modal-wrapper").classList.remove("modal-1-invisible")
+    document.querySelector(".modal-wrapper-2").classList.add("modal-2-invisible")
+    modal = null
 
-function openCloseModal() {
+}
+
+function openModal() {
     const listLienModal = document.querySelectorAll(".modification")
-    //On ouvre la modal lorsqu'on click sur un lieu modifier
+    //On ouvre la modal lorsqu'on click sur un lien modifier
     listLienModal.forEach(a => {
         a.addEventListener("click", () => {
             if (modal === null) {
@@ -384,23 +403,20 @@ function openCloseModal() {
             }
         })
     })
-    //On ferme la modal lorsque l'on clic sur la croix 
-    const baliseListButtonCloseModal = document.querySelector(".js-close-modal")
-    baliseListButtonCloseModal.addEventListener("click", () => {
-        closeModal()
-    })
-
-
-    // On supprime la propagation pour que la modal ne se ferme pas lorsqu'on clic dessus
-    document.querySelector(".modal-wrapper").addEventListener("click", (event) => {
-        event.stopPropagation()
-        //On la ferme lorsqu'on clic à l'extérieur
-        document.querySelector("aside").addEventListener("click", () => {
-            closeModal()
-        })
-    })
 }
-openCloseModal()
+openModal()
+
+//On ferme la modal 1 lorsque l'on clic sur la croix 
+document.querySelector(".js-close-modal").addEventListener("click", closeModal1)
+
+
+// On supprime la propagation pour que la modal ne se ferme pas lorsqu'on clic dessus
+document.querySelector(".modal-wrapper").addEventListener("click", (event) => {
+    event.stopPropagation()
+    //On la ferme lorsqu'on clic à l'extérieur
+    document.querySelector("aside").addEventListener("click", closeModal1)
+})
+
 
 //On change la modal lorsque on clic sur "ajouter une photo" en rendant invisible la 1 pour rendre visible l  la 2
 
@@ -409,41 +425,108 @@ document.querySelector(".button-add-img").addEventListener("click", () => {
     const baliseModalWrapper2 = document.querySelector(".modal-wrapper-2")
     baliseModalWrapper.classList.add("modal-1-invisible")
     baliseModalWrapper2.classList.remove("modal-2-invisible")
+    //On supprime l'écoute pour fermer la modal 1
+    document.querySelector(".js-close-modal").removeEventListener("click", closeModal1)
+    document.querySelector("aside").removeEventListener("click", closeModal1)
 
-    //On ferme la modal lorsque l'on clic sur la croix 
-    const baliseListButtonCloseModal = document.querySelector(".js-close-modal2")
-    baliseListButtonCloseModal.addEventListener("click", () => {
-        closeModal()
-        //et on revient au début en rendant display none à la 2 et pas la 1
-        baliseModalWrapper.classList.remove("modal-1-invisible")
-        baliseModalWrapper2.classList.add("modal-2-invisible")
-    })
+})
+
+//On ferme la modal lorsqu'on clic sur la croix 
+document.querySelector(".js-close-modal2").addEventListener("click", closeModal2)
 
 
-    // On supprime la propagation pour que la modal ne se ferme pas lorsqu'on clic dessus
-    document.querySelector(".modal-wrapper-2").addEventListener("click", (event) => {
-        event.stopPropagation()
-        //On la ferme lorsqu'on clic à l'extérieur
-        document.querySelector("aside").addEventListener("click", () => {
-            closeModal()
-            //et on revient au début en rendant display none à la 2 et pas la 1
-            baliseModalWrapper.classList.remove("modal-1-invisible")
-            baliseModalWrapper2.classList.add("modal-2-invisible")
-        })
-    })
+// On supprime la propagation pour que la modal ne se ferme pas lorsqu'on clic dessus
+document.querySelector(".modal-wrapper-2").addEventListener("click", (event) => {
+    event.stopPropagation()
+    //On la ferme lorsqu'on clic à l'extérieur
+    document.querySelector("aside").addEventListener("click", closeModal2)
+})
 
-    //On revien à la modal 1 lorsqu'on clic sur la flèche
+//On revien à la modal 1 lorsqu'on clic sur la flèche
 
-    document.querySelector(".js-arrow-modal2").addEventListener("click", () => {
-        baliseModalWrapper.classList.remove("modal-1-invisible")
-        baliseModalWrapper2.classList.add("modal-2-invisible")
-    })
-
+document.querySelector(".js-arrow-modal2").addEventListener("click", () => {
+    document.querySelector(".modal-wrapper").classList.remove("modal-1-invisible")
+    document.querySelector(".modal-wrapper-2").classList.add("modal-2-invisible")
 })
 
 
 
+//On indique au client que l'image télécharger est trop volumineuse (+ de 4 mo)
+function tooBig() {
+    document.getElementById("imgUrl").addEventListener("change", () => {
+        if (document.querySelector(".too-big") !== null) {
+            document.querySelector(".too-big").remove()
+        }
+        if (document.getElementById("imgUrl").files[0].size >= 4194304) {
+            console.log("l'image est trop volumineuse")
+            const baliseFieldset = document.querySelector("fieldset")
+            const baliseTooBig = document.createElement("p")
+            baliseTooBig.classList.add("too-big")
+            baliseTooBig.innerText = "Fichier trop volumineux"
+            baliseFieldset.appendChild(baliseTooBig)
+        }
+    })
+}
+
+// Submit du form modal 2
+function postWork() {
+    const newImg = document.getElementById("imgUrl")
+    const newTitle = document.getElementById("title")
+    const newCategoryId = document.getElementById("categoryId")
+    document.querySelector(".button-submit-form").setAttribute("disabled", true)
+
+    //On met un disabled sur le submit pour empecher de valider tant que tout les champs ne sont pas remplie
+    document.querySelector(".modal-wrapper-2 form").addEventListener("change", () => {
+        if (newTitle.value === "" || newCategoryId.value === "" || !newImg.files[0] || newImg.files[0].size >= 4194304) {
+            document.querySelector(".button-submit-form").disabled = true
+        } else {
+            document.querySelector(".button-submit-form").disabled = false
+        }
+    })
+   
+
+    //On lence la fonction pour indiquer si la photo est trop volumineuse
+    tooBig()
+    document.querySelector(".modal-wrapper-2 form").addEventListener("submit", (event) => {
+        event.preventDefault()
+        
+            const token = sessionStorage.getItem("token")
+            //On créé la charge utile pour le post (formData)
+            const formData = new FormData()
+            formData.append("image", newImg.files[0],)
+            formData.append("title", newTitle.value)
+            formData.append("category", parseInt(newCategoryId.value))
+
+            console.log(newTitle.value)
+            console.log(typeof parseInt(newCategoryId.value))
+
+            fetch("http://localhost:5678/api/works/", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+
+                },
+                body: formData
+            })
+                .then(reponse => {
+                    if (!reponse.ok) {
+                        console.log("Il y a une erreur")
+                    } else {
+                        console.log("Requète validé")
+                        //On met un message de succé lorsque la requéte est validé
+                        const baliseSucess = document.querySelector(".modal-wrapper-2 form div p")
+                        baliseSucess.innerText = "Projet ajouté avec succé"
+
+                        //On Supprime le msg succé lorsqu'on quitte la modal
+                        if (modal = null) {
+                            baliseSucess.innerText = ""
+                        }
+                    }
+                })
+        
+    })
+
+}
 
 
-
-
+postWork()
