@@ -36,6 +36,6 @@ function formListenerTryLogin() {
         }
     })
 }
-//on appel la fonction pour écouter le submit formulaire
+//on appel la fonction
 formListenerTryLogin()
 
