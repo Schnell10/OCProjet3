@@ -267,7 +267,8 @@ fieldset label:hover,
 select:hover,
 .button-submit-form:hover,
 figure i:hover,
-button:hover {
+button:hover,
+input[type="submit"]:hover {
 	cursor: pointer;
 }
 
@@ -313,7 +314,7 @@ a {
 	text-decoration: none;
 }
 
-/* Modif modale*/
+/* Modif modal*/
 aside {
 	position: fixed;
 	top: 0;
@@ -446,7 +447,7 @@ figure:hover .arrow {
 .button-add-delete p {
 	padding: 1%;
 	text-align: center;
-	color: #D65353;
+	color: #40f124;
 	font-weight: 600;
 }
 
@@ -612,6 +613,13 @@ fieldset p {
 	border-top: 0.1vw #B3B3B3 solid;
 }
 
+.div-input-submit p {
+	text-align: center;
+	color: #D65353;
+	margin-top: -10px;
+	margin-bottom: 10px;
+}
+
 /* message trop volumineux*/
 .too-big {
 	margin-top: 5px;
@@ -619,7 +627,7 @@ fieldset p {
 	font-size: 13px;
 }
 
-/*On grise le bouton submit lorsque les champs ne sont pas remplies*/
+/*On grise le bouton submit lorsque les champs ne sont pas remplis*/
 input[disabled] {
 	background-color: #A7A7A7;
 }
@@ -695,7 +703,8 @@ nav li {
 
 .gallery img {
 	width: 100%;
-
+    height: 430px;
+	object-fit: cover;
 }
 
 #contact {

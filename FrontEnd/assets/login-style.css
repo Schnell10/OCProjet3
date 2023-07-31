@@ -56,6 +56,11 @@ li:hover, footer p:hover {
     cursor: pointer;
 }
 
+header a {
+        text-decoration: none;
+        color: #000000;
+}
+
 /**Main**/
 
 main {

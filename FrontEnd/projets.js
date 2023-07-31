@@ -1,6 +1,6 @@
 
 
-// Récupération des objet projets dans l'api
+// Récupération des objets projets dans l'aAPI
 const works = await fetch('http://localhost:5678/api/works').then(works => works.json())
 
 
@@ -41,14 +41,14 @@ function generateWorks(works) {
         baliseFigure.appendChild(baliseImg)
         baliseFigure.appendChild(baliseFigcaption)
 
-        //Insertion de ces élément sur l'élément parent
+        //Insertion de ces éléments dans l'élément parent
         const gallery = document.querySelector(".gallery")
         gallery.appendChild(baliseFigure)
     }
 
 }
 
-//Création de la fonction pour rendre les filtre fonctionnels
+//Création de la fonction pour rendre les filtres fonctionnels
 
 function buttonFunctional() {
     //Boutons filtre all
@@ -96,7 +96,7 @@ createButton()
 //On les rend fonctionnels
 buttonFunctional()
 
-//fonction pour modifier la page Admin
+//Fonction pour modifier la page Admin
 function generatePageAdmin() {
     // Génération du html de la baniere
     const baliseHeader = document.querySelector("header")
@@ -127,7 +127,7 @@ function generatePageAdmin() {
     baliseAFirstModif.insertAdjacentText("beforeend", textBaliseAModif)
     baliseIntroduction.insertAdjacentElement("afterend", baliseAFirstModif)
 
-    //Génération du html pour le 2 vers modal
+    //Génération du html pour le lien 2 vers modal
     const baliseMyProject = document.querySelector(".my-project")
     const baliseASecondModif = document.createElement("a")
     const baliseISecondModif = document.createElement("i")
@@ -140,22 +140,22 @@ function generatePageAdmin() {
     baliseMyProject.appendChild(baliseASecondModif)
 }
 
-//fonction pour génèrer la page admin
+//Fonction pour générer la page admin
 function generateAdminWebPage() {
+    //Si le token est enregistré en sessionStorage c'est qu'on est connecté en tant qu'admin, on peu donc passer sur le site en mode admin
     const token = sessionStorage.getItem("token")
     if (token !== null) {
         const baliseLoginLogout = document.querySelector(".loginLogout")
         //création du bouton logout
         baliseLoginLogout.innerText = ""
         baliseLoginLogout.innerText = "Logout"
-        //On écoute le bouton logout pour supprimer le token dans le sessionstorage lorsque on click dessus et donc on se déconnecte de l'administrateur
+        //On écoute le bouton logout pour supprimer le token dans le sessionStorage lorsque l'on clique dessus et donc on se déconnecte de l'administrateur
         baliseLoginLogout.addEventListener("click", function () {
             sessionStorage.removeItem("token")
-            //rechargement de la page pour mettre à jour le storage
+            //Rechargement de la page pour mettre à jour le sessionStorage
             location.reload()
-            console.log(token)
         })
-        //On appel les fonction qui vont générer la nouvelle page admin
+        //On appel la fonction pour générer le reste de la page admin
         generatePageAdmin()
 
         //On rend invisible les boutons filtres
@@ -167,11 +167,7 @@ function generateAdminWebPage() {
 //On génère la page admin
 generateAdminWebPage()
 
-
-
-//On créé la modal
-
-
+//On crée la modal
 function generateModal() {
     //Mise en place de la modal
     const baliseIntroduction = document.querySelector("#introduction")
@@ -259,6 +255,7 @@ function createFromModal2() {
     const baliseOptionAppartment = document.createElement("option")
     const baliseOptionHotel = document.createElement("option")
     const baliseInputValidation = document.createElement("input")
+    const balisePWarning = document.createElement("p")
     const baliseDivInputSubmit = document.createElement("div")
     baliseIMontain.classList.add("fa-regular", "fa-image")
     baliseInputValidation.classList.add("button-submit-form")
@@ -300,6 +297,7 @@ function createFromModal2() {
     baliseSelect.appendChild(baliseOptionObject)
     baliseSelect.appendChild(baliseOptionAppartment)
     baliseSelect.appendChild(baliseOptionHotel)
+    baliseDivInputSubmit.appendChild(balisePWarning)
     baliseDivInputSubmit.appendChild(baliseInputValidation)
     baliseForm.appendChild(baliseFieldset)
     baliseForm.appendChild(baliseLabelTitle)
@@ -308,7 +306,7 @@ function createFromModal2() {
     baliseForm.appendChild(baliseSelect)
     baliseForm.appendChild(baliseDivInputSubmit)
 }
-//On créé la fonction pour supprimer une card
+//On crée la fonction pour supprimer une card
 async function deleteWork(card) {
     const token = sessionStorage.getItem("token")
     const id = card.id
@@ -332,12 +330,12 @@ async function deleteWork(card) {
             console.log("Il y a une erreur")
         })
 }
-// On génére les cards de la modal1
+// On génère les cards de la modal 1
 function generateWorkModal(works) {
     for (let i = 0; i < works.length; i++) {
         // Création d'une carte de la liste works
         const card = works[i]
-        // Création des élément du DOM pour les projets
+        // Création des éléments du DOM pour les projets
         const baliseFigure = document.createElement("figure")
         const baliseImg = document.createElement("img")
         baliseImg.src = card.imageUrl
@@ -371,16 +369,13 @@ function generateWorkModal(works) {
     }
 
 }
-
-//On lence les 4 fonctions afin de créer les modales, d'y ajouter les work et de pouvoir les supprimer sans raffraichir
-
+//On lence les 4 fonctions afin de créer les modales, d'y ajouter les works et de pouvoir les supprimer sans raffraichir la page
 generateModal()
 generateWorkModal(works)
 generateModal2()
 createFromModal2()
 
 let modal = null
-
 //création fonction pour fermer une modale
 function closeModalBeggin() {
     if (modal === null) return
@@ -394,40 +389,55 @@ function closeModalBeggin() {
     if (document.querySelector(".button-add-delete p").innerText = "Projet supprimé avec succés") {
         document.querySelector(".button-add-delete p").innerText = ""
     }
+    //On remet l'image preview invisible pour afficher l'input file de base (si on l'avais changé précédement)
+    if (document.querySelector(".div-fieldset-invisible")) {
+        document.querySelector("fieldset div").classList.remove("div-fieldset-invisible")
+        document.querySelector("fieldset img").classList.add("img-invisible")
+    }
+    //On supprime le potentiel message indiquant que l'image précédente était trop volumineuse
+    if (document.querySelector(".too-big") !== null) {
+        document.querySelector(".too-big").remove()
+    }
+    //On reset le formulaire de la modal 2 et remet en place le disabled
+    document.querySelector(".modal-wrapper-2 form").reset()
+    document.querySelector(".button-submit-form").setAttribute("disabled", true)
+
 }
 
-//On créé une fonction pour fermer la modal au clic croix et extérieur modal
+//On crée une fonction pour fermer la modal au clic sur la croix et à extérieur modal
 function closeModal() {
     //On ferme la modal 1 lorsque l'on clic sur la croix 
     document.querySelector(".js-close-modal").addEventListener("click", () => {
         closeModalBeggin()
     })
-    // On supprime la propagation pour que la modal ne se ferme pas lorsqu'on clic dessus
+    // On supprime la propagation pour que la modal 1 ne se ferme pas lorsqu'on clic dessus
     document.querySelector(".modal-wrapper").addEventListener("click", (event) => {
         event.stopPropagation()
-        //On la ferme lorsqu'on clic à l'extérieur
-        document.querySelector("aside").addEventListener("click", () => {
-            closeModalBeggin()
-        })
     })
-    //On ferme la modal 2 lorsqu'on clic sur la croix 
+    //On ferme la modal 1 lorsque l'on clic à l'extèrieur
+    document.querySelector("aside").addEventListener("click", () => {
+        closeModalBeggin()
+    })
+
+    //On ferme la modal 2 lorsque l'on clic sur la croix 
     document.querySelector(".js-close-modal2").addEventListener("click", () => {
         closeModalBeggin()
     })
-    // On supprime la propagation pour que la modal 2 ne se ferme pas lorsqu'on clic dessus
+    // On supprime la propagation pour que la modal 2 ne se ferme pas lorsque l'on clic dessus
     document.querySelector(".modal-wrapper-2").addEventListener("click", (event) => {
         event.stopPropagation()
-        //On la ferme lorsqu'on clic à l'extérieur
-        document.querySelector("aside").addEventListener("click", () => {
-            closeModalBeggin()
-        })
     })
+    //On la ferme lorsque l'on clic à l'extérieur
+    document.querySelector("aside").addEventListener("click", () => {
+        closeModalBeggin()
+    })
+
 }
 
-//Création de la fonction pour ouvrir la modal au click des lien
+//Création de la fonction pour ouvrir la modal au click des liens
 function openModal() {
     const listLienModal = document.querySelectorAll(".modification")
-    //On ouvre la modal lorsqu'on click sur un lien modifier
+    //On ouvre la modal 1 lorsque l'on click sur un lien "modifier"
     listLienModal.forEach(a => {
         a.addEventListener("click", () => {
             if (modal === null) {
@@ -435,49 +445,40 @@ function openModal() {
                 modal.removeAttribute("aria-hidden")
                 modal.setAttribute("aria-modal", "true")
                 document.querySelector(".modal-wrapper").classList.remove("modal-1-invisible")
+                //On lence la fonction qui permet de fermer la modal au click sur la croix ou à l'extérieur de la modal
                 closeModal()
             }
-            //On remet l'image preview invisible pour afficher l'input file (si on l'avais changé précédement)
-            if (document.querySelector(".div-fieldset-invisible")) {
-                document.querySelector("fieldset div").classList.remove("div-fieldset-invisible")
-                document.querySelector("fieldset img").classList.add("img-invisible")
-            }
-            //On supprime le potentiel message indiquant que l'image précédente était trop volumineuse
-            if (document.querySelector(".too-big") !== null) {
-                document.querySelector(".too-big").remove()
-            }
-            //On reset le formulaire de la modal 2 et remet en place le disabled
-            document.querySelector(".modal-wrapper-2 form").reset()
-            document.querySelector(".button-submit-form").setAttribute("disabled", true)
 
         })
     })
 }
 openModal()
 
-
-
-
-//On change la modal lorsque on clic sur "ajouter une photo" en rendant invisible la 1 pour rendre visible l  la 2
+//On change la modal lorsque on clic sur "ajouter une photo" en rendant invisible la 1 pour rendre visible la 2
 document.querySelector(".button-add-img").addEventListener("click", () => {
     const baliseModalWrapper = document.querySelector(".modal-wrapper")
     const baliseModalWrapper2 = document.querySelector(".modal-wrapper-2")
     baliseModalWrapper.classList.add("modal-1-invisible")
     baliseModalWrapper2.classList.remove("modal-2-invisible")
-    //On supprime le msg succés si on a delete un projet précédement.
+    //On supprime le msg succés si on a delete un projet précédement
     if (document.querySelector(".button-add-delete p").innerText = "Projet supprimé avec succés") {
         document.querySelector(".button-add-delete p").innerText = ""
     }
-
 })
-//On revien à la modal 1 lorsqu'on clic sur la flèche
+
+//On revien à la modal 1 lorsqu'on click sur la flèche
 document.querySelector(".js-arrow-modal2").addEventListener("click", () => {
     document.querySelector(".modal-wrapper").classList.remove("modal-1-invisible")
     document.querySelector(".modal-wrapper-2").classList.add("modal-2-invisible")
+    //On supprime le potentiel message indiquant que l'image précédente était trop volumineuse
+    if (document.querySelector(".too-big") !== null) {
+        document.querySelector(".too-big").remove()
+    }
 })
 
 //Fonction pour prévisualiser l'image de notre input file
 function previewFile() {
+    //Ce code permet de pouvoir lire le fichier (image pour le cas présent) dans l'input file
     const preview = document.querySelector("fieldset img");
     const file = document.getElementById("imgUrl").files[0];
     const reader = new FileReader();
@@ -501,7 +502,6 @@ function tooBig() {
         if (document.querySelector(".too-big") !== null) {
             document.querySelector(".too-big").remove()
         }
-
         //On met un msg d'erreur si le fichier dépasse 4 mo 
         if (document.getElementById("imgUrl").files[0].size >= 4194304) {
             const baliseFieldset = document.querySelector("fieldset")
@@ -514,11 +514,13 @@ function tooBig() {
         }
     })
 }
-
-//Création de la fonction pour mettre à jours les galleries dynamiquement une foi qu'on a ajouté un nouveau projet
+//Création de la fonction pour mettre à jour les galleries dynamiquement une fois qu'on a ajouté un nouveau projet
 async function newDynamiqueModal() {
     const reponse = await fetch('http://localhost:5678/api/works')
     const worksBis = await reponse.json()
+    //On supprime les deux galleries et on les recrée afin que le nouveau projet soit pris en compte
+    document.querySelector(".gallery").innerHTML = ""
+    document.querySelector(".gallery-modal").innerHTML = ""
     generateWorks(worksBis)
     generateWorkModal(worksBis)
 }
@@ -528,26 +530,35 @@ function postWork() {
     const newImg = document.getElementById("imgUrl")
     const newTitle = document.getElementById("title")
     const newCategoryId = document.getElementById("categoryId")
+    //On met un disabled sur le submit pour empecher de valider tant que tous les champs ne sont pas remplis
     document.querySelector(".button-submit-form").setAttribute("disabled", true)
-    //On met un disabled sur le submit pour empecher de valider tant que tout les champs ne sont pas remplie
+    //On indique à l'utilisateur que tout les champs sont à remplir, le msg s'enlève une fois qu'ils le sont
+    document.querySelector(".div-input-submit p").innerText = "Merci de remplir tout les champs"
     document.querySelector(".modal-wrapper-2 form").addEventListener("change", () => {
         if (newTitle.value === "" || newCategoryId.value === "" || !newImg.files[0] || newImg.files[0].size >= 4194304) {
             document.querySelector(".button-submit-form").disabled = true
+            //On indique à l'utilisateur que tout les champs sont à remplir, le msg s'enlève une foi qu'ils le sont
+            document.querySelector(".div-input-submit p").innerText = "Merci de remplir tout les champs"
         } else {
+            //Si tout les champs sont remplis, on enlève le disabled afin de rendre le input submit cliquable
             document.querySelector(".button-submit-form").disabled = false
+            //On enlève le msg demandant à l'utilisateur de remplir tous les champs.
+            document.querySelector(".div-input-submit p").innerText = ""
         }
     })
     //On lence la fonction pour indiquer si la photo est trop volumineuse
     tooBig()
+    //On écoute l'input submit
     document.querySelector(".modal-wrapper-2 form").addEventListener("submit", (event) => {
         event.preventDefault()
+        //On récupère le token dans le sessionStorage
         const token = sessionStorage.getItem("token")
         //On créé la charge utile pour le post (formData)
         const formData = new FormData()
         formData.append("image", newImg.files[0],)
         formData.append("title", newTitle.value)
         formData.append("category", parseInt(newCategoryId.value))
-        //On fait une requéte POST vers l'API
+        //On fait une requéte POST vers l'API afin d'y ajouter un projet
         fetch("http://localhost:5678/api/works/", {
             method: "POST",
             headers: {
@@ -559,11 +570,8 @@ function postWork() {
                 if (!reponse.ok) {
                     console.log("Il y a une erreur")
                 } else {
-                    console.log("Requète validé")
                     console.log(reponse)
                     //Si la requête POST est valide on ferme la modal et met à jour les 2 galleries sans raffraichir la page
-                    document.querySelector(".gallery").innerHTML = ""
-                    document.querySelector(".gallery-modal").innerHTML = ""
                     newDynamiqueModal()
                     closeModalBeggin()
                 }
