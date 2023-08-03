@@ -2,6 +2,14 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+:root {
+    --main-color: #1D6154;
+    --main-red-color: #B1663C; 
+    --grey-color: #B3B3B3;
+    --white-color: #FAFAFA; 
+    --black-color: #000000;
+	--fieldset-color: #B9C5CC;
+}
 
 html,
 body,
@@ -156,7 +164,7 @@ h1 {
 	font-family: 'Syne';
 	font-size: 22px;
 	font-weight: 800;
-	color: #B1663C
+	color: var(--main-red-color);
 }
 
 h1>span {
@@ -169,7 +177,7 @@ h2 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: var(--main-color);
 }
 
 /** modification du code css*/
@@ -181,20 +189,20 @@ footer {
 }
 
 #portfolio button {
-	color: #1D6154;
+	color: var(--main-color);
 	font-family: 'Syne';
 	font-size: 16px;
 	font-weight: 700;
 	background-color: transparent;
 	border-radius: 60px;
-	border: 1px solid #1D6154;
+	border: 1px solid var(--main-color);
 	padding: 9px 11px 9px 11px;
 	transition: 0.2s;
 }
 
 #portfolio button:focus {
-	background-color: #1D6154;
-	color: #FFFFFF;
+	background-color: var(--main-color);
+	color: var(--white-color);
 }
 
 #portfolio button:hover {
@@ -210,7 +218,7 @@ footer {
 
 nav a {
 	text-decoration: none;
-	color: #000000;
+	color: var(--black-color);
 }
 
 .loginLogout {
@@ -218,18 +226,18 @@ nav a {
 }
 
 nav a:hover {
-	color: #B1663C;
+	color: var(--main-red-color);
 }
 
 li:hover {
-	color: #B1663C;
+	color: var(--main-red-color);
 	cursor: pointer;
 }
 
 /*modif pour le site en mode administrateur*/
 .banner {
 	width: 100%;
-	background-color: rgb(0 0 0);
+	background-color: var(--black-color);
 	height: 59px;
 	display: flex;
 	justify-content: center;
@@ -239,8 +247,7 @@ li:hover {
 }
 
 .banner p {
-	color: rgb(255 255 255);
-	color: #FFF;
+	color: var(--white-color);
 	font-family: "Work Sans";
 	font-size: 16px;
 	font-weight: 400;
@@ -254,8 +261,8 @@ li:hover {
 	width: 216px;
 	height: 38px;
 	border-radius: 60px;
-	background-color: #FFF;
-	color: rgb(0 0 0);
+	background-color: var(--white-color);
+	color: var(--black-color);
 	font-family: "Work Sans";
 	font-size: 14px;
 	font-weight: 500;
@@ -310,7 +317,7 @@ input[type="submit"]:hover {
 }
 
 a {
-	color: #000000;
+	color: var(--black-color);
 	text-decoration: none;
 }
 
@@ -329,7 +336,7 @@ aside {
 
 .modal-wrapper,
 .modal-wrapper-2 {
-	background-color: rgb(255 255 255);
+	background-color: var(--white-color);
 	width: 600px;
 	height: 570px;
 	min-width: 181px;
@@ -338,7 +345,7 @@ aside {
 
 .js-close-modal,
 .js-close-modal2 {
-	background-color: #FFFFFF;
+	background-color: var(--white-color);
 	border: none;
 	padding: 0;
 	width: 24px;
@@ -362,7 +369,7 @@ aside figure i {
 }
 
 #modal h3 {
-	color: #000;
+	color: var(--black-color);
 	text-align: center;
 	font-family: "Work Sans";
 	font-size: 26px;
@@ -380,7 +387,7 @@ aside figure i {
 	gap: 2%;
 	width: 80%;
 	height: 60%;
-	border-bottom: 0.1vw #B3B3B3 solid;
+	border-bottom: 0.1vw var(--grey-color) solid;
 	padding-bottom: 5%;
 	overflow: auto;
 }
@@ -419,8 +426,8 @@ aside figure i {
 
 .modal-wrapper figure i {
 	font-size: 9px;
-	color: #FFFFFF;
-	background-color: #000;
+	color: var(--white-color);
+	background-color: var(--black-color);
 	border-radius: 3px;
 	padding: 3px 4px 3px 4px;
 }
@@ -447,15 +454,15 @@ figure:hover .arrow {
 .button-add-delete p {
 	padding: 1%;
 	text-align: center;
-	color: #40f124;
+	color: var(--main-color);
 	font-weight: 600;
 }
 
 .button-add-img {
 	border-radius: 20px;
-	background: #1D6154;
+	background: var(--main-color);
 	border: none;
-	color: #FFFFFF;
+	color: var(--white-color);
 	font-family: "Syne";
 	font-size: 14px;
 	font-weight: 700;
@@ -466,7 +473,7 @@ figure:hover .arrow {
 .button-delete-all {
 	border: none;
 	background-color: transparent;
-	color: #D65353;
+	color: var(--main-red-color);
 	font-family: "Syne";
 	font-size: 14px;
 	font-weight: 400;
@@ -497,7 +504,7 @@ aside[aria-hidden] {
 
 /* modif modal 2*/
 .js-arrow-modal2 {
-	background-color: #FFFFFF;
+	background-color: var(--white-color);
 	border: none;
 	padding: 0;
 	width: 21px;
@@ -546,7 +553,7 @@ fieldset div {
 }
 
 fieldset i {
-	color: #B9C5CC;
+	color: var(--fieldset-color);
 	width: 58px;
 	height: 58px;
 	font-size: 58px;
@@ -578,7 +585,7 @@ fieldset input {
 }
 
 fieldset label {
-	background: #CBD6DC;
+	background: var(--fieldset-color);
 	border-radius: 50px;
 	margin-bottom: 7px;
 	color: #306685;
@@ -586,7 +593,6 @@ fieldset label {
 	font-size: 14px;
 	font-weight: 500;
 	border-radius: 50px;
-	background: #CBD6DC;
 	padding: 10px 33px;
 }
 
@@ -603,19 +609,19 @@ fieldset p {
 	align-items: center;
 	justify-content: center;
 	height: 36px;
-	background: #A7A7A7;
+	background: var(--grey-color);
 	border: none;
 	font-size: 14px;
 }
 
 .div-input-submit {
 	padding-top: 20px;
-	border-top: 0.1vw #B3B3B3 solid;
+	border-top: 0.1vw var(--grey-color) solid;
 }
 
 .div-input-submit p {
 	text-align: center;
-	color: #D65353;
+	color: var(--main-red-color);
 	margin-top: -10px;
 	margin-bottom: 10px;
 }
@@ -623,17 +629,17 @@ fieldset p {
 /* message trop volumineux*/
 .too-big {
 	margin-top: 5px;
-	color: #D65353;
+	color: var(--main-red-color);
 	font-size: 13px;
 }
 
 /*On grise le bouton submit lorsque les champs ne sont pas remplis*/
 input[disabled] {
-	background-color: #A7A7A7;
+	background-color: var(--grey-color);
 }
 
 .button-submit-form {
-	background-color: #1D6154;
+	background-color: var(--main-color);
 }
 
 /* On rend invisible l'image de preview*/
@@ -747,7 +753,7 @@ nav li {
 input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
-	color: white;
+	color: var(--white-color);
 	margin: 0 auto;
 	width: 180px;
 	text-align: center;
@@ -755,7 +761,7 @@ input[type="submit"] {
 }
 
 section input[type="submit"] {
-	background-color: #1D6154;
+	background-color: var(--main-color);
 	margin-top: 40px;
 }
 

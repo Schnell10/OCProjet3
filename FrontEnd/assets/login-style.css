@@ -4,6 +4,14 @@
     font-family: 'work sans';
 }
 
+:root {
+    --main-color: #1D6154;
+    --main-red-color: #B1663C; 
+    --grey-color: #B3B3B3;
+    --white-color: #FAFAFA; 
+    --black-color: #000000;
+}
+
 body {
     width: 100%
 }
@@ -21,7 +29,7 @@ h1 {
     font-family: 'Syne';
     font-size: 22px;
     font-weight: 800;
-    color: #B1663C
+    color: var(--main-red-color);
 }
 
 h1>span {
@@ -52,13 +60,13 @@ nav li {
 }
 
 li:hover, footer p:hover {
-    color: #B1663C;
+    color: var(--main-red-color);
     cursor: pointer;
 }
 
 header a {
         text-decoration: none;
-        color: #000000;
+        color: var(--black-color);
 }
 
 /**Main**/
@@ -70,7 +78,7 @@ main {
 }
 
 h2 {
-    color: #1D6154;
+    color: var(--main-color);
     text-align: center;
     font-size: 30px;
     font-family: Syne;
@@ -91,7 +99,7 @@ label {
 [name=email],
 [name=password] {
     display: block;
-    background: #FFF;
+    background: var(--white-color);
     box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
     width: 379px;
     height: 51px;
@@ -108,13 +116,13 @@ form {
 
 button {
     font-family: 'Syne';
-    background-color: #1D6154;
+    background-color: var(--main-color);
     margin: auto;
     width: 179px;
     height: 36px;
     margin-bottom: 28px;
     border-radius: 60px;
-    color: #FFF;
+    color: var(--white-color);
     text-align: center;
     font-size: 14px;
     font-weight: 700;
@@ -144,7 +152,7 @@ input, button {
 }
 
 form p {
-    color: #B1663C;
+    color: var(--main-red-color);
     margin-bottom: 30px;
 }
 /**Footer**/

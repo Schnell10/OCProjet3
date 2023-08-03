@@ -4,9 +4,10 @@ function formListenerTryLogin() {
     const baliseErreurP = document.createElement("p")
     const baliseDiv = document.querySelector(".insertErreur")
     baliseDiv.appendChild(baliseErreurP)
-    const formLogin = document.querySelector(".formLogin")
     //On écoute le formulaire au click du submit
+    const formLogin = document.querySelector(".formLogin")
     formLogin.addEventListener("submit", async function (event) {
+        //On enlève le rechargement de la page par défaut
         event.preventDefault()
         //Création de l'objet du test login (mail+mdp)
         const valueLogin = {
@@ -28,14 +29,20 @@ function formListenerTryLogin() {
         //On séléctionne uniquement le token et on le stock dans le sessionsStorage
         const goodToken = reponseLogin.token
         sessionStorage.setItem("token", goodToken);
-        console.log(sessionStorage.getItem("token"))
-
         if (goodToken === undefined || goodToken === null) {
+            //Si le token n'est pas enregistré, c'est que le mot de passe ou l'email sont incorrect, on met donc un msg d'erreur
             baliseErreurP.innerText = "Email ou mot de passe incorrect, veuilliez recommencer."
         } else {
             //Si les id sont correct on est redirigé vers le site
             document.location.replace("index.html")
         }
+    })
+    //On enlève le msg d'erreur lorsque l'on clic de nouveau sur l'un des deux input en écoutant les deux input à la fois
+    const inputLogin = document.querySelectorAll("input")
+    inputLogin.forEach(input => {
+        input.addEventListener("click", () => {
+            baliseErreurP.innerText = ""
+        })
     })
 }
 //on appel la fonction
