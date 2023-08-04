@@ -160,7 +160,7 @@ function generateAdminWebPage() {
 
         //On rend invisible les boutons filtres
         document.querySelector(".buttons").classList.add("filter-invisible")
-
+        console.log(token)
     }
 }
 

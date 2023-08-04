@@ -31,7 +31,9 @@ function formListenerTryLogin() {
         sessionStorage.setItem("token", goodToken);
         if (goodToken === undefined || goodToken === null) {
             //Si le token n'est pas enregistré, c'est que le mot de passe ou l'email sont incorrect, on met donc un msg d'erreur
-            baliseErreurP.innerText = "Email ou mot de passe incorrect, veuilliez recommencer."
+            baliseErreurP.innerText = "Erreur dans l’identifiant ou le mot de passe"
+            //On supprime le token sinon il s'enregistre quand même dans le sessionStorage comme undefined
+            sessionStorage.removeItem("token")
         } else {
             //Si les id sont correct on est redirigé vers le site
             document.location.replace("index.html")
