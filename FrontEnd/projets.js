@@ -379,6 +379,7 @@ let modal = null
 //création fonction pour fermer une modale
 function closeModalBeggin() {
     if (modal === null) return
+    //Si la modal n'est pas null elle est donc ouverte, on la ferme en la rendant invisible
     modal = document.querySelector("aside")
     modal.setAttribute("aria-hidden", "true")
     modal.removeAttribute("aria-modal", "false")
