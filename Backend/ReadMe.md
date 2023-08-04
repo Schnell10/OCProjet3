@@ -3,8 +3,9 @@
 Ce repo contient le code backend de l'architecte Sophie Bluel. 
 
 ## Lancement du backend
+Si vous ouvrez le projet avec live server, il faut ouvrir le dossier back-end et front-end dans deux page différente sur Vs-code
 
-Après avoir récupéré le REPO executez la commande `npm install` pour installer les dépendances du projet
+Ensuite executez la commande `npm install` dans le terminal du back-end pour installer les dépendances du projet
 
 Une fois les dépendances installées lancez le projet avec la commande `npm start`
 
