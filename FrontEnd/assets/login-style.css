@@ -59,7 +59,7 @@ nav li {
     font-weight: 600;
 }
 
-li:hover, footer p:hover {
+li:hover, footer p:hover, a:hover {
     color: var(--main-red-color);
     cursor: pointer;
 }

@@ -26,16 +26,16 @@ function formListenerTryLogin() {
         })
         //On traduit la reponse de l'API reçu en JSON
         const reponseLogin = await reponse.json()
-        //On séléctionne uniquement le token et on le stock dans le sessionsStorage
+        //On séléctionne uniquement le token 
         const goodToken = reponseLogin.token
-        sessionStorage.setItem("token", goodToken);
+        
         if (goodToken === undefined || goodToken === null) {
             //Si le token n'est pas enregistré, c'est que le mot de passe ou l'email sont incorrect, on met donc un msg d'erreur
             baliseErreurP.innerText = "Erreur dans l’identifiant ou le mot de passe"
-            //On supprime le token sinon il s'enregistre quand même dans le sessionStorage comme undefined
-            sessionStorage.removeItem("token")
         } else {
-            //Si les id sont correct on est redirigé vers le site
+            //Si les id sont correct on stock le token dans le sessionsStorage
+            sessionStorage.setItem("token", goodToken);
+            //Et on est redirigé vers le site
             document.location.replace("index.html")
         }
     })

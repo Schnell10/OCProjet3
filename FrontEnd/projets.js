@@ -1,7 +1,7 @@
 
 
 // Récupération des objets projets dans l'aAPI
-const works = await fetch('http://localhost:5678/api/works').then(works => works.json())
+const works = fetch('http://localhost:5678/api/works').then(works => works.json())
 
 
 
@@ -37,19 +37,15 @@ function generateWorks(works) {
         baliseImg.src = card.imageUrl
         const baliseFigcaption = document.createElement("figcaption")
         baliseFigcaption.innerText = card.title
-
         baliseFigure.appendChild(baliseImg)
         baliseFigure.appendChild(baliseFigcaption)
-
         //Insertion de ces éléments dans l'élément parent
         const gallery = document.querySelector(".gallery")
         gallery.appendChild(baliseFigure)
     }
-
 }
 
 //Création de la fonction pour rendre les filtres fonctionnels
-
 function buttonFunctional() {
     //Boutons filtre all
     const buttonAll = document.querySelector(".all")
@@ -61,6 +57,7 @@ function buttonFunctional() {
     //Bouton filtres objets
     const buttonObject = document.querySelector(".object")
     buttonObject.addEventListener("click", () => {
+        //On filtre les cards pour qu'il n'affiche que les cards objet grace à la méthode filter()
         const worksFilterObject = works.filter(function (work) {
             return work.category.name === "Objets"
         })
@@ -147,7 +144,6 @@ function generateAdminWebPage() {
     if (token !== null) {
         const baliseLoginLogout = document.querySelector(".loginLogout")
         //création du bouton logout
-        baliseLoginLogout.innerText = ""
         baliseLoginLogout.innerText = "Logout"
         //On écoute le bouton logout pour supprimer le token dans le sessionStorage lorsque l'on clique dessus et donc on se déconnecte de l'administrateur
         baliseLoginLogout.addEventListener("click", function () {
@@ -169,7 +165,7 @@ generateAdminWebPage()
 
 //On crée la modal
 function generateModal() {
-    //Mise en place de la modal
+    //Mise en place de la modal 1
     const baliseIntroduction = document.querySelector("#introduction")
     const baliseAside = document.createElement("aside")
     const baliseDivWrapper = document.createElement("div")
@@ -307,14 +303,15 @@ function createFromModal2() {
     baliseForm.appendChild(baliseDivInputSubmit)
 }
 //On crée la fonction pour supprimer une card
-async function deleteWork(card) {
+function deleteWork(card) {
+    //On récupére le token dans le sessionStorage
     const token = sessionStorage.getItem("token")
     const id = card.id
-    await fetch(`http://localhost:5678/api/works/${id}`, {
+    fetch(`http://localhost:5678/api/works/${id}`, {
         method: "DELETE",
         headers: {
-            "accept": "*/*",
-            "Authorization": `Bearer ${token}`
+            "accept": "*/*",  //On accepte tout types de medias
+            "Authorization": `Bearer ${token}` //On envois le token dans la requète afin que l'API autorise le delete
         }
     })
         .then(reponse => {
@@ -361,7 +358,7 @@ function generateWorkModal(works) {
         //On supprime les cards au clic sur l'icone trash
         baliseTrash.addEventListener("click", () => {
             deleteWork(card)
-            //On supprime les cards dans la gallery sans rafraichir la page
+            //On supprime les cards dans les deux galleries sans rafraichir la page
             const baliseImgCardList = document.querySelectorAll(`img[src="${card.imageUrl}"]`)
             baliseImgCardList[0].parentNode.remove()
             baliseImgCardList[1].parentNode.remove()
@@ -378,7 +375,7 @@ createFromModal2()
 let modal = null
 //création fonction pour fermer une modale
 function closeModalBeggin() {
-    if (modal === null) return
+    if (modal === null) return //Si la modal est null ça veut dire qu'elle est déjà fermé donc on ne fait rien
     //Si la modal n'est pas null elle est donc ouverte, on la ferme en la rendant invisible
     modal = document.querySelector("aside")
     modal.setAttribute("aria-hidden", "true")
@@ -491,8 +488,9 @@ function previewFile() {
 
     if (file) {
         reader.readAsDataURL(file);
-        //On rend l'image visible
+        //On rend le fieldset invisible
         document.querySelector("fieldset div").classList.add("div-fieldset-invisible")
+        //On rend l'image visible en prévisualisation
         document.querySelector("fieldset img").classList.remove("img-invisible")
     }
 }
@@ -511,6 +509,7 @@ function tooBig() {
             baliseTooBig.innerText = "Fichier trop volumineux"
             baliseFieldset.appendChild(baliseTooBig)
         } else {
+            //Si l'image est inférieur à 4 mo on la prévisualise
             previewFile()
         }
     })
@@ -555,6 +554,7 @@ function postWork() {
         //On récupère le token dans le sessionStorage
         const token = sessionStorage.getItem("token")
         //On créé la charge utile pour le post (formData)
+        //==>Façon pratique d'organiser et d'envoyer des données de formulaire
         const formData = new FormData()
         formData.append("image", newImg.files[0],)
         formData.append("title", newTitle.value)
@@ -563,6 +563,7 @@ function postWork() {
         fetch("http://localhost:5678/api/works/", {
             method: "POST",
             headers: {
+                "accept": "*/*",
                 "Authorization": `Bearer ${token}`,
             },
             body: formData
